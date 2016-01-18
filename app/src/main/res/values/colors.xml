@@ -5,4 +5,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="galaxy_fg">#E5DCD3</color>
+    <color name="galaxy_bg">#5E6B77</color>
+    <color name="galaxy_purple">#633E5D</color>
+    <color name="galaxy_light1">#91D4CB</color>
+    <color name="galaxy_light2">#C1E9D1</color>
 </resources>
