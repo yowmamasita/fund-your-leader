@@ -80,7 +80,7 @@ public class FullscreenActivity extends AppCompatActivity {
     }
 
     public void chooseACandidate(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CandidatesListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

@@ -1,6 +1,7 @@
 package com.cloudsherpas.fundyourleader;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,11 +53,11 @@ public class CandidatesListActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
                 String candidate = candidates[+position];
-                String pledge = pledges[+position];
-                Toast.makeText(getApplicationContext(), candidate, Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(getApplicationContext(), candidate, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), CandidateActivity.class);
+                intent.putExtra(MainActivity.CANDIDATE_NAME, candidate);
+                startActivity(intent);
             }
         });
     }

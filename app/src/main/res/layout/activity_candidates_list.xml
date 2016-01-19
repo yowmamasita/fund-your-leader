@@ -9,12 +9,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cloudsherpas.fundyourleader.CandidatesListActivity">
 
-    <ListView
-        android:id="@android:id/list"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="match_parent"
+        android:layout_above="@android:id/list"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Choose Your Leader"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal"
+            android:padding="12dp" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+    </LinearLayout>
 
 </RelativeLayout>

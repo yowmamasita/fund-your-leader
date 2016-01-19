@@ -42,7 +42,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
-            android:textColor="#2A363B"
+            android:textColor="@color/galaxy_light2"
             android:gravity="right"
             android:foregroundGravity="right"
             android:paddingRight="7dp"
