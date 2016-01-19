@@ -9,6 +9,7 @@ import android.content.Intent;
 
 import com.cloudsherpas.fundyourleader.db.CandidateContract;
 import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
+import com.cloudsherpas.fundyourleader.model.Candidate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.cloudsherpas.fundyourleader.MESSAGE";
-    private List<String> candidates = new ArrayList<>();
+    private List<Candidate> candidates = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 String lastName = cursor.getString(
                         cursor.getColumnIndex(
                                 CandidateContract.CandidateEntry.COLUMN_LAST_NAME));
-                candidates.add(lastName);
+                Candidate candidate = new Candidate();
+                candidate.setLastName(lastName);
+                candidates.add(candidate);
                 cursor.moveToNext();
             }
         }
@@ -44,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void createTestimonial(View view) {
         Intent intent = new Intent(this, TestimonialActivity.class);
-        String candidateName = candidates.get(0);
-        intent.putExtra(EXTRA_MESSAGE, candidateName);
+        Candidate candidate = candidates.get(0);
+        intent.putExtra(EXTRA_MESSAGE, candidate.getLastName());
         startActivity(intent);
     }
 }
