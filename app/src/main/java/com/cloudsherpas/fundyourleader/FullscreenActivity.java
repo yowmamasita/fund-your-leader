@@ -9,9 +9,15 @@ import android.view.View;
 
 import com.cloudsherpas.fundyourleader.db.CandidateContract;
 import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
+import com.cloudsherpas.fundyourleader.model.Candidate;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.Firebase;
+
+import org.joda.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FullscreenActivity extends AppCompatActivity {
@@ -26,9 +32,18 @@ public class FullscreenActivity extends AppCompatActivity {
         // Database
         CandidateDbHelper mDbHelper = new CandidateDbHelper(getApplicationContext());
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, "Binay");
-        db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
+        List<Candidate> candidates = new ArrayList<>();
+        candidates.add(new Candidate("Jejomar", "Binay", new LocalDate("1942-11-11")));
+        candidates.add(new Candidate("Miriam", "Santiago", new LocalDate("1945-06-15")));
+        candidates.add(new Candidate("Rodrigo", "Duterte", new LocalDate("1945-03-28")));
+        candidates.add(new Candidate("Grace", "Poe", new LocalDate("1968-09-03")));
+        candidates.add(new Candidate("Mar", "Roxas", new LocalDate("1957-05-13")));
+        // Insert to db
+        for (Candidate candidate : candidates) {
+            ContentValues values = new ContentValues();
+            values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, candidate.getLastName());
+            db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
+        }
     }
 
     @Override

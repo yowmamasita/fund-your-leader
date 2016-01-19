@@ -1,6 +1,6 @@
 package com.cloudsherpas.fundyourleader.model;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * Created by ben on 1/19/16.
@@ -9,7 +9,13 @@ public class Candidate {
 
     private String firstName;
     private String lastName;
-    private DateTime birthday;
+    private LocalDate birthday;
+
+    public Candidate(String firstName, String lastName, LocalDate birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -27,11 +33,11 @@ public class Candidate {
         this.lastName = lastName;
     }
 
-    public DateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(DateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 }

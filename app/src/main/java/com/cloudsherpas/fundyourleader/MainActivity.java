@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 String lastName = cursor.getString(
                         cursor.getColumnIndex(
                                 CandidateContract.CandidateEntry.COLUMN_LAST_NAME));
-                Candidate candidate = new Candidate();
-                candidate.setLastName(lastName);
+                Log.v("MainActivity", lastName);
+                Candidate candidate = new Candidate(null, lastName, null);
                 candidates.add(candidate);
                 cursor.moveToNext();
             }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public void createTestimonial(View view) {
 //        Intent intent = new Intent(this, TestimonialActivity.class);
         Intent intent = new Intent(this, PledgeAmountListActivity.class);
-        Candidate candidate = candidates.get(0);
+        Candidate candidate = candidates.get(2);
         intent.putExtra(CANDIDATE_NAME, candidate.getLastName());
         startActivity(intent);
     }
