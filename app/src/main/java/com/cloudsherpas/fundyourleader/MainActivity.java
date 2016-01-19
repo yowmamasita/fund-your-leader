@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void createTestimonial(View view) {
         Intent intent = new Intent(this, TestimonialActivity.class);
-        String message = "Binay";
-        intent.putExtra(EXTRA_MESSAGE, message);
+        String candidateName = "Binay";
+        intent.putExtra(EXTRA_MESSAGE, candidateName);
         startActivity(intent);
     }
 }
