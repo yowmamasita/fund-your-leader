@@ -15,7 +15,9 @@ public class CandidateDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + CandidateContract.CandidateEntry.TABLE_NAME + " (" +
                     CandidateContract.CandidateEntry._ID + " INTEGER PRIMARY KEY," +
-                    CandidateContract.CandidateEntry.COLUMN_NAME_NAME + " TEXT" +
+                    CandidateContract.CandidateEntry.COLUMN_FIRST_NAME + " TEXT," +
+                    CandidateContract.CandidateEntry.COLUMN_LAST_NAME + " TEXT," +
+                    CandidateContract.CandidateEntry.COLUMN_BIRTHDAY + " TEXT" +
             " )";
 
     private static final String SQL_DELETE_ENTRIES =

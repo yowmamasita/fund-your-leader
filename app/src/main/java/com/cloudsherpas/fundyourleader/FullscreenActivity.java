@@ -28,7 +28,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(CandidateContract.CandidateEntry.COLUMN_NAME_NAME, "Binay");
+        values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, "Binay");
         db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
     }
 
