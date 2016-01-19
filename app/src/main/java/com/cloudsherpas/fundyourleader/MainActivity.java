@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 String lastName = cursor.getString(
                         cursor.getColumnIndex(
                                 CandidateContract.CandidateEntry.COLUMN_LAST_NAME));
-                Log.v("MainActivity", lastName);
+                Log.v("MainActivity/lastName", lastName);
                 Candidate candidate = new Candidate(null, lastName, null);
                 candidates.add(candidate);
                 cursor.moveToNext();

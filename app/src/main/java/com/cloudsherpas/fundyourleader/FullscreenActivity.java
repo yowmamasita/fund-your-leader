@@ -1,6 +1,8 @@
 package com.cloudsherpas.fundyourleader;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,21 +30,28 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
         Firebase.setAndroidContext(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
-
-        // Database
-        CandidateDbHelper mDbHelper = new CandidateDbHelper(getApplicationContext());
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        List<Candidate> candidates = new ArrayList<>();
-        candidates.add(new Candidate("Jejomar", "Binay", new LocalDate("1942-11-11")));
-        candidates.add(new Candidate("Miriam", "Santiago", new LocalDate("1945-06-15")));
-        candidates.add(new Candidate("Rodrigo", "Duterte", new LocalDate("1945-03-28")));
-        candidates.add(new Candidate("Grace", "Poe", new LocalDate("1968-09-03")));
-        candidates.add(new Candidate("Mar", "Roxas", new LocalDate("1957-05-13")));
-        // Insert to db
-        for (Candidate candidate : candidates) {
-            ContentValues values = new ContentValues();
-            values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, candidate.getLastName());
-            db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        long firstOpen = sharedPref.getInt(getString(R.string.first_open_flag), 0);
+        if (firstOpen == 0) {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt(getString(R.string.first_open_flag), 1);
+            editor.commit();
+            // Database
+            CandidateDbHelper mDbHelper = new CandidateDbHelper(getApplicationContext());
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            List<Candidate> candidates = new ArrayList<>();
+            candidates.add(new Candidate("Jejomar", "Binay", new LocalDate("1942-11-11")));
+            candidates.add(new Candidate("Miriam", "Santiago", new LocalDate("1945-06-15")));
+            candidates.add(new Candidate("Rodrigo", "Duterte", new LocalDate("1945-03-28")));
+            candidates.add(new Candidate("Grace", "Poe", new LocalDate("1968-09-03")));
+            candidates.add(new Candidate("Mar", "Roxas", new LocalDate("1957-05-13")));
+            // Insert to db
+            for (Candidate candidate : candidates) {
+                ContentValues values = new ContentValues();
+                values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, candidate.getLastName());
+                db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
+            }
         }
     }
 
