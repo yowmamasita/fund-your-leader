@@ -36,10 +36,8 @@ public class PledgeAmountListActivity extends AppCompatActivity {
 
         //Adapter to display the loaded data
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.activity_list_item, android.R.id.text1, pledgeAmounts
+                this, android.R.layout.simple_list_item_activated_1, pledgeAmounts
         );
-
-        final Context context = this;
 
         //Assign adapter to listView
         pledgeListView.setAdapter(adapter);
@@ -50,7 +48,7 @@ public class PledgeAmountListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String pledgeAmountItem = (String) pledgeListView.getAdapter().getItem(position);
 //                Toast.makeText(getApplicationContext(), pledgeAmountItem, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, TestimonialActivity.class);
+                Intent intent = new Intent(getApplicationContext(), TestimonialActivity.class);
                 intent.putExtra(MainActivity.CANDIDATE_NAME, candidateName);
                 intent.putExtra(MainActivity.PLEDGE_AMOUNT, pledgeAmountItem);
                 startActivity(intent);

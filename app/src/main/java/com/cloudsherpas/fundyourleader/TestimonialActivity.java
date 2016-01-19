@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class TestimonialActivity extends AppCompatActivity {
 
@@ -17,6 +18,12 @@ public class TestimonialActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.testimonialText);
         String message = "#whyimvotingfor" + candidateName + " pledged P" + intent.getStringExtra(MainActivity.PLEDGE_AMOUNT);
         editText.setText(message);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "Posted", Toast.LENGTH_SHORT).show();
     }
 
     public void postTestimonial(View view) {
