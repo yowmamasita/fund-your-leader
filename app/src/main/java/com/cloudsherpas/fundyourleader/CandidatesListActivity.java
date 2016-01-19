@@ -24,7 +24,7 @@ public class CandidatesListActivity extends ListActivity {
     Integer[] imgId = {
             R.mipmap.duterte,
             R.mipmap.roxas,
-            R.mipmap.miriamsantiago,
+            R.mipmap.santiago,
             R.mipmap.poe,
             R.mipmap.binay
     };
