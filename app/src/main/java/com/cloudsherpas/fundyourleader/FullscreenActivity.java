@@ -8,12 +8,11 @@ import android.content.Intent;
 
 import com.cloudsherpas.fundyourleader.db.CandidateContract;
 import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.firebase.client.Firebase;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 public class FullscreenActivity extends AppCompatActivity {
 
     @Override
@@ -21,12 +20,11 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
         Firebase.setAndroidContext(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        // Database
         CandidateDbHelper mDbHelper = new CandidateDbHelper(getApplicationContext());
-
-        // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, "Binay");
         db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
@@ -36,6 +34,23 @@ public class FullscreenActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
     }
 }
