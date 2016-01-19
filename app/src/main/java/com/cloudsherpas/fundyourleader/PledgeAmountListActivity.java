@@ -28,26 +28,17 @@ public class PledgeAmountListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String candidateName = intent.getStringExtra(MainActivity.CANDIDATE_NAME);
 
-        //Configuration for ListView
         pledgeListView = (ListView) findViewById(R.id.listView);
-
-        //Mock data of pledge amounts
         String[] pledgeAmounts = new String[]{ "100", "500", "1000", "2000", "5000", "10000" };
-
-        //Adapter to display the loaded data
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_list_item_activated_1, pledgeAmounts
         );
-
-        //Assign adapter to listView
         pledgeListView.setAdapter(adapter);
 
-        //ListView item click listener
         pledgeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String pledgeAmountItem = (String) pledgeListView.getAdapter().getItem(position);
-//                Toast.makeText(getApplicationContext(), pledgeAmountItem, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), TestimonialActivity.class);
                 intent.putExtra(MainActivity.CANDIDATE_NAME, candidateName);
                 intent.putExtra(MainActivity.PLEDGE_AMOUNT, pledgeAmountItem);

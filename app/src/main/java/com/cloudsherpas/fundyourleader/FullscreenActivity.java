@@ -30,12 +30,14 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
         Firebase.setAndroidContext(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        String preferencesFileKey = getString(R.string.preference_file_key);
         SharedPreferences sharedPref = this.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        long firstOpen = sharedPref.getInt(getString(R.string.first_open_flag), 0);
+                preferencesFileKey, Context.MODE_PRIVATE);
+        String firstOpenFlag = getString(R.string.first_open_flag);
+        long firstOpen = sharedPref.getInt(firstOpenFlag, 0);
         if (firstOpen == 0) {
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt(getString(R.string.first_open_flag), 1);
+            editor.putInt(firstOpenFlag, 1);
             editor.commit();
             // Database
             CandidateDbHelper mDbHelper = new CandidateDbHelper(getApplicationContext());

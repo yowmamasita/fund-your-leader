@@ -16,7 +16,8 @@ public class TestimonialActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String candidateName = intent.getStringExtra(MainActivity.CANDIDATE_NAME);
         EditText editText = (EditText) findViewById(R.id.testimonialText);
-        String message = "#whyimvotingfor" + candidateName + " pledged P" + intent.getStringExtra(MainActivity.PLEDGE_AMOUNT);
+        String message = "#" + getString(R.string.hashtag) + candidateName;
+        message += " (pledged ₱" + intent.getStringExtra(MainActivity.PLEDGE_AMOUNT) + ")";
         editText.setText(message);
     }
 
