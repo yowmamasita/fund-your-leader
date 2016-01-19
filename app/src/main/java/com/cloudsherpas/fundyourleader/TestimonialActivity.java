@@ -13,9 +13,10 @@ public class TestimonialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testimonial);
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String candidateName = intent.getStringExtra(MainActivity.CANDIDATE_NAME);
         EditText editText = (EditText) findViewById(R.id.testimonialText);
-        editText.setText("#whyimvotingfor" + message);
+        String message = "#whyimvotingfor" + candidateName + " pledged P" + intent.getStringExtra(MainActivity.PLEDGE_AMOUNT);
+        editText.setText(message);
     }
 
     public void postTestimonial(View view) {

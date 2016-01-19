@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
 
 import com.cloudsherpas.fundyourleader.db.CandidateContract;
 import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
@@ -33,9 +34,7 @@ public class FullscreenActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        chooseACandidate(this.findViewById(android.R.id.content));
     }
 
     @Override
@@ -52,5 +51,15 @@ public class FullscreenActivity extends AppCompatActivity {
 
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
+    }
+
+    public void chooseACandidate(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void exitApp(View view) {
+        finish();
     }
 }

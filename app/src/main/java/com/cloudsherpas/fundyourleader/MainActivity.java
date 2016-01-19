@@ -16,7 +16,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.cloudsherpas.fundyourleader.MESSAGE";
+    public final static String CANDIDATE_NAME = "com.cloudsherpas.fundyourleader.CANDIDATE_NAME";
+    public final static String PLEDGE_AMOUNT = "com.cloudsherpas.fundyourleader.PLEDGE_AMOUNT";
     private List<Candidate> candidates = new ArrayList<>();
 
     @Override
@@ -46,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createTestimonial(View view) {
-        Intent intent = new Intent(this, TestimonialActivity.class);
+//        Intent intent = new Intent(this, TestimonialActivity.class);
+        Intent intent = new Intent(this, PledgeAmountListActivity.class);
         Candidate candidate = candidates.get(0);
-        intent.putExtra(EXTRA_MESSAGE, candidate.getLastName());
+        intent.putExtra(CANDIDATE_NAME, candidate.getLastName());
         startActivity(intent);
     }
 }
