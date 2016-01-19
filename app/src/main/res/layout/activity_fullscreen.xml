@@ -35,6 +35,14 @@
         android:id="@+id/button4"
         android:layout_gravity="right|bottom" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="version 1.0"
+        android:id="@+id/textView2"
+        android:layout_gravity="center" />
+
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
 

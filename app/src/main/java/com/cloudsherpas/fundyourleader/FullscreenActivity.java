@@ -14,7 +14,7 @@ import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
 import com.cloudsherpas.fundyourleader.model.Candidate;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.firebase.client.Firebase;
+//import com.firebase.client.Firebase;
 
 import org.joda.time.LocalDate;
 
@@ -28,7 +28,7 @@ public class FullscreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
-        Firebase.setAndroidContext(this);
+//        Firebase.setAndroidContext(this);
         FacebookSdk.sdkInitialize(getApplicationContext());
         String preferencesFileKey = getString(R.string.preference_file_key);
         SharedPreferences sharedPref = this.getSharedPreferences(
