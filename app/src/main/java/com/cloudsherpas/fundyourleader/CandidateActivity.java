@@ -286,10 +286,10 @@ public class CandidateActivity extends AppCompatActivity {
             View view = inflater.inflate(R.layout.campaign_expense_list, null);
             ListView campaignExpenseListView = (ListView) view.findViewById(R.id.listView3);
 
-            String campaignExpense1 = "Spent P250000 on Media advertisements.";
-            String campaignExpense2 = "Spent P100000 on Rental of Campaign Venues";
-            String campaignExpense3 = "Spent P138000 on Transportation";
-            String campaignExpense4 = "Spent P206900 on Security Purposes";
+            String campaignExpense1 = "Spent ₱250000 on Media advertisements.";
+            String campaignExpense2 = "Spent ₱100000 on Rental of Campaign Venues";
+            String campaignExpense3 = "Spent ₱138000 on Transportation";
+            String campaignExpense4 = "Spent ₱206900 on Security Purposes";
 
             String[] pledgeAmounts = new String[]{ campaignExpense1, campaignExpense2, campaignExpense3, campaignExpense4 };
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
