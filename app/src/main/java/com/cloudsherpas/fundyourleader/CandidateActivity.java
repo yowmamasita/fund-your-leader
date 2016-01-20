@@ -259,8 +259,12 @@ public class CandidateActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.testimonial_list, null);
             ListView pledgeListView = (ListView) view.findViewById(R.id.listView2);
-            String pledge = "#whyiamvotingfor" + candidateName + " because he is generous, he gave me ₱500";
-            String[] pledgeAmounts = new String[]{ pledge, pledge, pledge, pledge };
+            String pledge = "#whyiamvotingfor" + candidateName + " because he is generous, he gave me ₱";
+            String[] pledgeAmounts = new String[]{
+                    pledge + 500,
+                    pledge + 1000,
+                    pledge + 1500,
+                    pledge + 3000 };
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     getContext(), android.R.layout.simple_list_item_activated_1, pledgeAmounts
             );
