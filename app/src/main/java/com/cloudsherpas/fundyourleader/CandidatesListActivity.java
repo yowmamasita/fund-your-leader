@@ -1,14 +1,16 @@
 package com.cloudsherpas.fundyourleader;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class CandidatesListActivity extends ListActivity {
+public class CandidatesListActivity extends AppCompatActivity {
+
+    public final static String CANDIDATE_NAME = "com.cloudsherpas.fundyourleader.CANDIDATE_NAME";
+    public final static String PLEDGE_AMOUNT = "com.cloudsherpas.fundyourleader.PLEDGE_AMOUNT";
 
     ListView candidatesListView;
 
@@ -54,9 +56,8 @@ public class CandidatesListActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String candidate = candidates[+position];
-//                Toast.makeText(getApplicationContext(), candidate, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), CandidateActivity.class);
-                intent.putExtra(MainActivity.CANDIDATE_NAME, candidate);
+                intent.putExtra(CANDIDATE_NAME, candidate.split(" ")[1]); // surname
                 startActivity(intent);
             }
         });

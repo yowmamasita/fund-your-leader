@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <uses-permission android:name="android.permission.INTERNET" />
 
         <meta-data
@@ -21,8 +21,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme">
-        </activity>
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,11 +35,11 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
+		<activity
             android:name=".CandidateActivity"
             android:label="@string/title_activity_candidate"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CandidatesListActivity"></activity>
+        <activity android:name=".CandidatesListActivity" />
 
     </application>
 
