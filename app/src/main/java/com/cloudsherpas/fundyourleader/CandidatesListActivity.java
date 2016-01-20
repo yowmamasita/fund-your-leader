@@ -9,6 +9,9 @@ import android.widget.ListView;
 
 public class CandidatesListActivity extends AppCompatActivity {
 
+    public final static String CANDIDATE_NAME = "com.cloudsherpas.fundyourleader.CANDIDATE_NAME";
+    public final static String PLEDGE_AMOUNT = "com.cloudsherpas.fundyourleader.PLEDGE_AMOUNT";
+
     ListView candidatesListView;
 
     //Candidates
@@ -53,9 +56,8 @@ public class CandidatesListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String candidate = candidates[+position];
-//                Toast.makeText(getApplicationContext(), candidate, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), CandidateActivity.class);
-                intent.putExtra(MainActivity.CANDIDATE_NAME, candidate);
+                intent.putExtra(CANDIDATE_NAME, candidate.split(" ")[1]); // surname
                 startActivity(intent);
             }
         });

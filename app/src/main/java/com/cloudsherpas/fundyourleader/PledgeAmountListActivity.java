@@ -26,7 +26,7 @@ public class PledgeAmountListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pledge_amount_list);
 
         Intent intent = getIntent();
-        final String candidateName = intent.getStringExtra(MainActivity.CANDIDATE_NAME);
+        final String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
 
         pledgeListView = (ListView) findViewById(R.id.listView);
         String[] pledgeAmounts = new String[]{ "100", "500", "1000", "2000", "5000", "10000" };
@@ -40,8 +40,8 @@ public class PledgeAmountListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String pledgeAmountItem = (String) pledgeListView.getAdapter().getItem(position);
                 Intent intent = new Intent(getApplicationContext(), TestimonialActivity.class);
-                intent.putExtra(MainActivity.CANDIDATE_NAME, candidateName);
-                intent.putExtra(MainActivity.PLEDGE_AMOUNT, pledgeAmountItem);
+                intent.putExtra(CandidatesListActivity.CANDIDATE_NAME, candidateName);
+                intent.putExtra(CandidatesListActivity.PLEDGE_AMOUNT, pledgeAmountItem);
                 startActivity(intent);
             }
         });

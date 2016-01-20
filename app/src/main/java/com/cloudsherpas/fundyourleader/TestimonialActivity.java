@@ -14,15 +14,15 @@ public class TestimonialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testimonial);
         Intent intent = getIntent();
-        String candidateName = intent.getStringExtra(MainActivity.CANDIDATE_NAME);
+        String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
         EditText editText = (EditText) findViewById(R.id.testimonialText);
         String message = "#" + getString(R.string.hashtag) + candidateName;
-        message += " (pledged ₱" + intent.getStringExtra(MainActivity.PLEDGE_AMOUNT) + ")";
+        message += " (pledged ₱" + intent.getStringExtra(CandidatesListActivity.PLEDGE_AMOUNT) + ")";
         editText.setText(message);
     }
 
     public void postTestimonial(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CandidatesListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Toast.makeText(getApplicationContext(), "Posted", Toast.LENGTH_SHORT).show();

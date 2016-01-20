@@ -1,5 +1,6 @@
 package com.cloudsherpas.fundyourleader;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.cloudsherpas.fundyourleader.model.Candidate;
 
 public class CandidateActivity extends AppCompatActivity {
 
@@ -54,12 +57,16 @@ public class CandidateActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        Intent intent = getIntent();
+        final String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), PledgeAmountListActivity.class);
+                intent.putExtra(CandidatesListActivity.CANDIDATE_NAME, candidateName);
+                startActivity(intent);
             }
         });
 
