@@ -34,11 +34,11 @@ public class CandidatesListActivity extends AppCompatActivity {
 
     //Pledge Amounts
     String[] pledges = {
-            "5000000",
-            "3500000",
-            "8200000",
-            "5100000",
-            "6800000",
+            "₱5,000,000",
+            "₱3,500,000",
+            "₱8,200,000",
+            "₱5,100,000",
+            "₱6,800,000",
     };
 
     @Override
