@@ -3,6 +3,7 @@ package com.cloudsherpas.fundyourleader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cloudsherpas.fundyourleader.db.CandidateContract;
@@ -49,11 +53,31 @@ public class CandidateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_candidate);
 
+        Intent intent = getIntent();
+        final String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
+        final String lastName = candidateName.split(" ")[1];
+        Candidate candidate;
+
+        // query candidate full name
+        CandidateDbHelper mDbHelper = new CandidateDbHelper(this);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        String qry = "SELECT firstName, lastName FROM " +
+                CandidateContract.CandidateEntry.TABLE_NAME +
+                " WHERE " + CandidateContract.CandidateEntry.COLUMN_LAST_NAME + " = ?";
+        Cursor cursor = db.rawQuery(qry, new String[] { lastName } );
+        cursor.moveToFirst();
+        String cFirstName = cursor.getString(cursor.getColumnIndex(CandidateContract.CandidateEntry.COLUMN_FIRST_NAME));
+        String cLastName = cursor.getString(cursor.getColumnIndex(CandidateContract.CandidateEntry.COLUMN_LAST_NAME));
+        String fullName = cFirstName + " " + cLastName;
+        candidate = new Candidate(cFirstName, cLastName, null);
+        db.close();
+        setTitle(fullName);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), candidate);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -61,27 +85,6 @@ public class CandidateActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        Intent intent = getIntent();
-        final String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
-        final String lastName = candidateName.split(" ")[1];
-
-        // query candidate full name
-//        CandidateDbHelper mDbHelper = new CandidateDbHelper(this);
-//        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-//        String qry = "SELECT firstName, lastName FROM " + CandidateContract.CandidateEntry.TABLE_NAME + " WHERE lastName LIKE ?;";
-//        Cursor cursor = db.rawQuery(qry, new String[]{candidateName});
-//        String[] projection = {
-//                CandidateContract.CandidateEntry.COLUMN_FIRST_NAME,
-//                CandidateContract.CandidateEntry.COLUMN_LAST_NAME
-//        };
-        //"lastName LIKE '" + candidateName + "'"
-//        Cursor cursor = db.query(CandidateContract.CandidateEntry.TABLE_NAME, projection, null, null, null, null, null);
-//        Log.v("CandidateActivity/DB", "" + cursor.getCount());
-//        cursor.moveToFirst();
-//        String fullName = cursor.getString(cursor.getColumnIndex("firstName")) + " " + cursor.getString(cursor.getColumnIndex("lastName"));
-//        db.close();
-        setTitle(candidateName);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +150,8 @@ public class CandidateActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_candidate, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -159,12 +162,33 @@ public class CandidateActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private Candidate candidate;
+
+        public SectionsPagerAdapter(FragmentManager fm, Candidate candidate) {
             super(fm);
+            this.candidate = candidate;
         }
 
         @Override
         public Fragment getItem(int position) {
+            Fragment f;
+            Bundle args = new Bundle();
+            args.putString("candidateFirstName", candidate.getFirstName());
+            args.putString("candidateLastName", candidate.getLastName());
+            switch (position) {
+                case 0:
+                    f = new InformationFragment();
+                    f.setArguments(args);
+                    return f;
+                case 1:
+                    f = new TestimonialFragment();
+                    f.setArguments(args);
+                    return f;
+                case 2:
+                    f = new ExpensesFragment();
+                    f.setArguments(args);
+                    return f;
+            }
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
@@ -189,4 +213,80 @@ public class CandidateActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    public static class InformationFragment extends Fragment {
+
+        private String candidateFName;
+        private String candidateLName;
+        public InformationFragment() { }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            this.candidateFName = getArguments().getString("candidateFirstName");
+            this.candidateLName = getArguments().getString("candidateLastName");
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_candidate, null);
+//            ImageView imgCandidateImage = (ImageView) view.findViewById(R.id.candidateImage);
+//            imgCandidateImage.setImageResource(R.mipmap.binay);
+            TextView txtCandidateName = (TextView) view.findViewById(R.id.candidateName);
+            txtCandidateName.setText(candidateFName + " " + candidateLName);
+            TextView txtPledgeAmount = (TextView) view.findViewById(R.id.pledgeAmount);
+            txtPledgeAmount.setText("₱5,000 raised");
+            TextView txtCandidateInfo = (TextView) view.findViewById(R.id.candidateInfo);
+            txtCandidateInfo.setText(candidateLName + " is a bad person");
+            return view;
+//            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+    }
+    public static class TestimonialFragment extends Fragment {
+
+        private String candidateName;
+        public TestimonialFragment() { }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            this.candidateName = getArguments().getString("candidateLastName");
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.testimonial_list, null);
+            ListView pledgeListView = (ListView) view.findViewById(R.id.listView2);
+            String pledge = "#whyiamvotingfor" + candidateName + " because he is generous, he gave me ₱500";
+            String[] pledgeAmounts = new String[]{ pledge, pledge, pledge, pledge };
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                    getContext(), android.R.layout.simple_list_item_activated_1, pledgeAmounts
+            );
+            pledgeListView.setAdapter(adapter);
+            return view;
+//            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+    }
+    public static class ExpensesFragment extends Fragment {
+
+        private String candidateName;
+        public ExpensesFragment() { }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            this.candidateName = getArguments().getString("candidateLastName");
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//            View view = inflater.inflate(R.layout.page1, null);
+//            return view;
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+    }
+
 }

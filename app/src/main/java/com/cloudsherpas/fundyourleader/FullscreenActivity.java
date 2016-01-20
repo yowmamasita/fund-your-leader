@@ -51,7 +51,9 @@ public class FullscreenActivity extends AppCompatActivity {
             // Insert to db
             for (Candidate candidate : candidates) {
                 ContentValues values = new ContentValues();
+                values.put(CandidateContract.CandidateEntry.COLUMN_FIRST_NAME, candidate.getFirstName());
                 values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, candidate.getLastName());
+                values.put(CandidateContract.CandidateEntry.COLUMN_BIRTHDAY, candidate.getBirthday().toString());
                 db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
             }
             db.close();

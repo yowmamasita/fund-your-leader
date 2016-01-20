@@ -40,4 +40,6 @@ public class Candidate {
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
+
+    public String getFullName() { return firstName + " " + lastName; }
 }
