@@ -57,7 +57,7 @@ public class CandidatesListActivity extends AppCompatActivity {
                                     int position, long id) {
                 String candidate = candidates[+position];
                 Intent intent = new Intent(getApplicationContext(), CandidateActivity.class);
-                intent.putExtra(CANDIDATE_NAME, candidate.split(" ")[1]); // surname
+                intent.putExtra(CANDIDATE_NAME, candidate); // surname
                 startActivity(intent);
             }
         });

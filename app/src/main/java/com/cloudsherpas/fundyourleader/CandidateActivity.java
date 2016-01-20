@@ -1,6 +1,8 @@
 package com.cloudsherpas.fundyourleader;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +23,8 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.cloudsherpas.fundyourleader.db.CandidateContract;
+import com.cloudsherpas.fundyourleader.db.CandidateDbHelper;
 import com.cloudsherpas.fundyourleader.model.Candidate;
 
 public class CandidateActivity extends AppCompatActivity {
@@ -59,13 +64,31 @@ public class CandidateActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String candidateName = intent.getStringExtra(CandidatesListActivity.CANDIDATE_NAME);
+        final String lastName = candidateName.split(" ")[1];
+
+        // query candidate full name
+//        CandidateDbHelper mDbHelper = new CandidateDbHelper(this);
+//        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+//        String qry = "SELECT firstName, lastName FROM " + CandidateContract.CandidateEntry.TABLE_NAME + " WHERE lastName LIKE ?;";
+//        Cursor cursor = db.rawQuery(qry, new String[]{candidateName});
+//        String[] projection = {
+//                CandidateContract.CandidateEntry.COLUMN_FIRST_NAME,
+//                CandidateContract.CandidateEntry.COLUMN_LAST_NAME
+//        };
+        //"lastName LIKE '" + candidateName + "'"
+//        Cursor cursor = db.query(CandidateContract.CandidateEntry.TABLE_NAME, projection, null, null, null, null, null);
+//        Log.v("CandidateActivity/DB", "" + cursor.getCount());
+//        cursor.moveToFirst();
+//        String fullName = cursor.getString(cursor.getColumnIndex("firstName")) + " " + cursor.getString(cursor.getColumnIndex("lastName"));
+//        db.close();
+        setTitle(candidateName);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PledgeAmountListActivity.class);
-                intent.putExtra(CandidatesListActivity.CANDIDATE_NAME, candidateName);
+                intent.putExtra(CandidatesListActivity.CANDIDATE_NAME, lastName);
                 startActivity(intent);
             }
         });

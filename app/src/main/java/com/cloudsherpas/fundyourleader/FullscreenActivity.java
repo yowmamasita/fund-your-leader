@@ -54,6 +54,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 values.put(CandidateContract.CandidateEntry.COLUMN_LAST_NAME, candidate.getLastName());
                 db.insert(CandidateContract.CandidateEntry.TABLE_NAME, "", values);
             }
+            db.close();
         }
     }
 
