@@ -1,2 +1,3 @@
-# cs-android-hackathon
-Our entry for the hackathon
+# Fund Your Leader
+
+Crowdsourcing election finances
