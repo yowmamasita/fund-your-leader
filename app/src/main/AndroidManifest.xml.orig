@@ -20,48 +20,33 @@
             android:name=".FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-<<<<<<< HEAD
             android:theme="@style/FullscreenTheme">
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
-            android:theme="@style/FullscreenTheme" >
->>>>>>> 67f5c31eb86e94ac028ebb14757656bd98caf6ed
         </activity>
-
-        <activity android:name=".MainActivity" />
-
         <activity android:name=".TestimonialActivity" />
-
-        <activity android:name=".MainTabActivity" >
-        </activity>
-
+        <activity android:name=".MainTabActivity" />
         <activity android:name=".PledgeAmountListActivity" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-<<<<<<< HEAD
         <activity
             android:name=".CandidateActivity"
             android:label="@string/title_activity_candidate"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+<<<<<<< HEAD
+        <activity android:name=".CandidatesListActivity"></activity>
 =======
+        <activity android:name=".CandidatesListActivity" />
+>>>>>>> 9478db4a14a9a47198a72b0051e1dfaad953b76c
 
-        <activity android:name=".CandidatesListActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
->>>>>>> 67f5c31eb86e94ac028ebb14757656bd98caf6ed
     </application>
 
 </manifest>
